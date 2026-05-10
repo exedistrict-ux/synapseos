@@ -2,8 +2,8 @@
 
 > **AMD Developer Hackathon 2026** | Built on HuggingFace Inference API | Powered by Qwen2.5-7B
 
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
-[![Gradio](https://img.shields.io/badge/Gradio-4.44+-orange.svg)](https://gradio.app)
+[![Python](https://img.shields.io/badge/Python-3.14+-blue.svg)](https://python.org)
+[![Gradio](https://img.shields.io/badge/Gradio-6.14+-orange.svg)](https://gradio.app)
 [![HuggingFace](https://img.shields.io/badge/HuggingFace-Qwen2.5--7B-yellow.svg)](https://huggingface.co)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
