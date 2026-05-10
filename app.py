@@ -1,31 +1,20 @@
-﻿import gradio as gr
+import gradio as gr
 from gtts import gTTS
 import tempfile
 import time
 import os
-from huggingface_hub import InferenceClient
-from dotenv import load_dotenv
-
-# Load environment variables from .env
-load_dotenv()
+from openai import OpenAI
 
 # ============================================================
-# CONFIGURATION
+# CONFIGURATION — AMD GPU via vLLM
 # ============================================================
-HF_TOKEN = os.environ.get("HF_TOKEN")
+VLLM_BASE_URL = os.environ.get("VLLM_BASE_URL", "http://129.212.178.240:8000/v1")
+MODEL_NAME = os.environ.get("MODEL_NAME", "facebook/opt-125m")
 
-if not HF_TOKEN:
-    print("❌ ERROR: HF_TOKEN not found in .env file!")
-    exit(1)
+client = OpenAI(base_url=VLLM_BASE_URL, api_key="dummy")
 
-client = InferenceClient(
-    model="Qwen/Qwen2.5-7B-Instruct",
-    token=HF_TOKEN
-)
-
-print("✅ TOKEN LOADED:", HF_TOKEN[:20] + "...")
-print("✅ Model: Qwen/Qwen2.5-7B-Instruct")
-
+print("Model:", MODEL_NAME)
+print("AMD vLLM URL:", VLLM_BASE_URL)
 # ============================================================
 # AGENT DEFINITIONS
 # ============================================================
@@ -111,24 +100,17 @@ memory = {
 def call_hf_model(system_prompt: str, user_idea: str, max_new_tokens: int = 500) -> str:
     try:
         response = client.chat.completions.create(
+            model=MODEL_NAME,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"Analyze this idea in detail: {user_idea}"}
             ],
             max_tokens=max_new_tokens,
-            temperature=0.7,
-            top_p=0.9
+            temperature=0.7
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
-        error_msg = str(e)
-        if "401" in error_msg or "Unauthorized" in error_msg:
-            return "❌ 401 Error: Invalid HF_TOKEN. Check your .env file and make sure the token is correct."
-        elif "503" in error_msg:
-            return "⚠️ 503 Error: HuggingFace API overloaded. Try again in a moment."
-        else:
-            return f"❌ Error: {error_msg[:150]}"
-
+        return f"Error: {str(e)}"
 # ============================================================
 # TEXT TO SPEECH
 # ============================================================
@@ -163,7 +145,7 @@ def run_debate(user_idea: str, progress=gr.Progress()):
 
     full_debate = "# SynapseOS — Agent Debate\n\n"
     full_debate += f"**Idea Under Analysis:** {user_idea}\n\n"
-    full_debate += "**Model:** Qwen2.5-7B-Instruct (HuggingFace Free Tier)\n\n"
+    full_debate += "**Model:** Qwen2.5-0-5B-Instruct (HuggingFace Free Tier)\n\n"
     full_debate += "---\n\n"
 
     agent_list = list(AGENTS.keys())
@@ -240,7 +222,7 @@ with gr.Blocks(
     gr.Markdown("""
 # SynapseOS — AI Agent Civilization
 ### 5 Expert AI Agents Debate Your Idea in Real-Time
-**Powered by Qwen2.5-7B (HuggingFace Free) · English Only · Voice Summary Included**
+**Powered by Qwen2.5-0-5B (HuggingFace Free) · English Only · Voice Summary Included**
 
 > Each agent calls the HuggingFace API independently and gives a detailed, unique analysis of your idea.
     """)
@@ -278,7 +260,7 @@ with gr.Blocks(
 
 ## How It Works
 1. You enter an idea
-2. Each agent calls Qwen2.5-7B on HuggingFace
+2. Each agent calls Qwen2.5-0-5B on HuggingFace
 3. Gets a detailed 150+ word response
 4. PM Agent gives final GO/NO-GO
 5. Voice summary generated!
@@ -317,7 +299,7 @@ with gr.Blocks(
     gr.Markdown("""
 ---
 **Setup:** Set your HuggingFace token as HF_TOKEN in .env file.
-**Free Model:** Qwen/Qwen2.5-7B-Instruct — free on HuggingFace Inference API.
+**Free Model:** Qwen/Qwen2.5-0-5B-Instruct — free on HuggingFace Inference API.
 **Install:** pip install gradio huggingface_hub gtts
     """)
 
