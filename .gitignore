@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environments
+venv/
+venv311/
+.env/
+
+# Environment Variables
+.env
+
+# VS Code
+.vscode/
+
+# Gradio
+.gradio/
+
+# Logs
+*.log
