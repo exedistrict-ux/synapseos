@@ -1,189 +1,166 @@
-Hugging Face's logo
-Hugging Face
-Models
-Datasets
-Spaces
-Buckets
-new
-Docs
-Enterprise
-Pricing
-
-
-Spaces:
-lablab-ai-amd-developer-hackathon
-/
-synapseos
-
-
-like
-0
-
-Logs
-App
-Files
-Community
-Settings
-synapseos/
-README.md
-Metadata UI
-license
-
-
-title
-
-SynapseOS
-sdk
-
-
-Gradio
-emoji
-
-
-+ Add Emoji
-colorFrom
-
-
-gray
-colorTo
-
-
-purple
-pinned
-
-thumbnail
-
-No file chosen
-short_description
-
-
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-⌄
-⌄
-⌄
-⌄
-⌄
-⌄
-⌄
-⌄
-⌄
-⌄
-⌄
-⌄
-⌄
-⌄
 ---
+title: SynapseOS
+emoji: 🧬
+colorFrom: gray
+colorTo: purple
+sdk: gradio
+sdk_version: 6.14.0
+app_file: app.py
+pinned: true
+license: mit
+---
+
+# 🧬 SynapseOS — AI Agent Civilization
+
+> **5 Expert AI Agents that Think, Debate, and Decide — Powered by AMD MI300X GPU**
+
+[![AMD](https://img.shields.io/badge/AMD-MI300X%20GPU-ED1C24?style=for-the-badge&logo=amd)](https://www.amd.com/en/developer/resources/rocm-hub.html)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-Spaces-FFD21E?style=for-the-badge&logo=huggingface)](https://huggingface.co/spaces/lablab-ai-amd-developer-hackathon/synapseos)
+[![Gradio](https://img.shields.io/badge/Gradio-6.14-FF7C00?style=for-the-badge)](https://gradio.app)
+[![Python](https://img.shields.io/badge/Python-3.14+-3776AB?style=for-the-badge&logo=python)](https://python.org)
+[![License](https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge)](LICENSE)
+
+---
+
+## 🎯 What is SynapseOS?
+
+**SynapseOS** is a multi-agent AI debate system where **5 specialized AI agents** independently analyze any business idea or problem — each bringing a distinct professional perspective — and collectively arrive at a **GO / CONDITIONAL GO / NO-GO** decision.
+
+Built for the **AMD Developer Hackathon 2026**, SynapseOS runs **Qwen2.5-0.5B-Instruct** via **vLLM** on **AMD MI300X GPU** infrastructure, delivering fast, structured, and intelligent multi-agent reasoning.
+
+> Think of it as assembling a full expert boardroom — a Project Manager, Senior Developer, Devil's Advocate, Financial Analyst, and Security Expert — all debating your idea simultaneously in seconds.
+
+---
+
+## 🖥️ Live Demo
+
+<!-- SCREENSHOT PLACEHOLDER — Add after deployment -->
+<!-- ![SynapseOS Main Interface](screenshots/main.png) -->
+
+**🌐 Space URL:** [https://huggingface.co/spaces/lablab-ai-amd-developer-hackathon/synapseos](https://huggingface.co/spaces/lablab-ai-amd-developer-hackathon/synapseos)
+
+---
+
+## 🤖 The 5 Expert Agents
+
+| # | Agent | Role | What It Delivers |
+|---|-------|------|-----------------|
+| 1 | 🧠 **PM Agent** | Project Manager | Phases, timeline, milestones, GO/NO-GO |
+| 2 | 💻 **Developer Agent** | Senior Developer | Tech stack, architecture, scalability |
+| 3 | 🔍 **Critic Agent** | Devil's Advocate | Risks, flaws, failure scenarios |
+| 4 | 💰 **Finance Agent** | Financial Analyst | Costs, revenue model, break-even |
+| 5 | 🔒 **Security Agent** | Security Expert | Vulnerabilities, GDPR, auth strategy |
+
+Each agent receives the **same idea** but analyzes it through its own professional lens — producing **150+ word** structured responses independently.
+
+---
+
+## ✨ Key Features
+
+- **⚡ AMD MI300X Powered** — vLLM inference server running on AMD GPU hardware
+- **🤖 5 Parallel AI Agents** — Each agent calls the model independently with unique system prompts
+- **📊 Structured Analysis** — Every agent delivers 5-point detailed breakdown
+- **🎯 Final GO/NO-GO Decision** — PM Agent synthesizes all perspectives into a verdict
+- **🔊 Voice Summary** — Full English text-to-speech audio summary via gTTS
+- **🧠 Session Memory** — Tracks and displays all ideas analyzed in the session
+- **🌐 Public Share Link** — Instantly shareable Gradio link
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    USER INPUT (Idea)                     │
+└─────────────────────┬───────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│              SynapseOS Orchestrator (app.py)             │
+│                   Gradio UI Interface                    │
+└──┬──────┬──────┬──────┬──────┬──────────────────────────┘
+   │      │      │      │      │
+   ▼      ▼      ▼      ▼      ▼
+  PM    Dev   Critic  Finance Security
+Agent  Agent  Agent   Agent   Agent
+   │      │      │      │      │
+   └──────┴──────┴──────┴──────┘
+                  │
+                  ▼
+   ┌──────────────────────────────┐
+   │   vLLM OpenAI-Compatible     │
+   │   API Server (Port 8000)     │
+   │   AMD MI300X GPU Instance    │
+   └──────────────┬───────────────┘
+                  │
+                  ▼
+   ┌──────────────────────────────┐
+   │  Qwen2.5-0.5B-Instruct       │
+   │  Running on ROCm / AMD GPU   │
+   └──────────────────────────────┘
+                  │
+                  ▼
+   ┌──────────────────────────────┐
+   │   Final Decision + Voice     │
+   │   Summary (gTTS)             │
+   └──────────────────────────────┘
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| **GPU Compute** | AMD MI300X | High-performance AI inference |
+| **ML Framework** | ROCm + vLLM | OpenAI-compatible inference server |
+| **AI Model** | Qwen2.5-0.5B-Instruct | Fast, efficient language model |
+| **UI Framework** | Gradio 4.44 | Web interface |
+| **API Client** | OpenAI Python SDK | vLLM API communication |
+| **Voice** | gTTS | Text-to-speech summary |
+| **Hosting** | HuggingFace Spaces | Public deployment |
+
+---
+
+## 🚀 Local Setup
+
+### Prerequisites
+- Python 3.11+
+- HuggingFace account + API token
+- AMD GPU with ROCm (for local vLLM) **or** AMD Developer Cloud access
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/exedistrict-ux/synapseos.git
+cd synapseos
+```
+
+### 2. Create Virtual Environment
+```bash
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+
+# Linux/Mac
+source .venv/bin/activate
+```
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure Environment
+Create `.env` file:
+```env
+HF_TOKEN=hf_your_token_here
+VLLM_BASE_URL=http://your_amd_gpu_ip:8000/v1
+MODEL_NAME=Qwen/Qwen2.5-0.5B-Instruct
+```
+
+### 5. Start AMD vLLM Server (on AMD GPU instance)
+```bash
 pip install vllm
 python -m vllm.entrypoints.openai.api_server \
   --model Qwen/Qwen2.5-0.5B-Instruct \
@@ -296,11 +273,3 @@ MIT License — see [LICENSE](LICENSE) for details.
 ---
 
 *Built with ❤️ on AMD MI300X · ROCm · vLLM · Gradio*
-Commit directly to the
-main
-branch
-Open as a pull request to the
-main
-branch
-Commit changes
-Upload images, audio, and videos by dragging in the text input, pasting, or clicking here.
