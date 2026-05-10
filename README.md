@@ -74,7 +74,7 @@ Think of it as having a full expert team in your pocket — a PM, Developer, Cri
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/yourusername/synapseos.git
+git clone https://github.com/exedistrict-ux/synapseos.git
 cd synapseos
 ```
 
